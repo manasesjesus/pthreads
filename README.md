@@ -70,8 +70,8 @@ Hallo Leute! I'm thread 6 of 7. My ID is 170872832
 #### [pythagoras.c](pythagoras.c)
 
 The Pythagoras' theorem states the relation among the three sides of a right-angled triangle, where the sum of the areas of the two squares on the sides (a, b) equals the area of the square on the hypotenuse (c), and it can be represented with the equation a2 + b2 = c2 as shown in the following image:
-![Pythagoras' theorem](img/pythagorean.png)
 
+![Pythagoras' theorem](img/pythagorean.png)
 
  The program uses two threads; each one to calculate the areas of the two squares on the sides. Initially, the hypotenuse value is set to zero. When one thread has made its calculation, it sums it to the hypotenuse, therefore it has to be treated as a critical section. It uses mutex to protect the shared data. To compile it may be necessary to add the option -lm to link the math.h library.
 
@@ -94,8 +94,8 @@ Hypotenuse is 5.70
 #### [queens_pth.c](queens_pth.c)
 
 The Eight Queens Puzzle is a classic strategy game problem that consists of a chessboard and eight chess queens. Following the chess game’s rules, the objective is to situate the queens on  the board in such a way that all of them are safe, this means that no queen can attack each other as shown in the following image:
-![Eight Queens Puzzle](img/8-queens.gif)
 
+![Eight Queens Puzzle](img/8-queens.gif)
 
 The puzzle was originally described by the chess composer Max Bezzel and extended by Franz Nauck to be a N-Queens Puzzle, with N queens on a chessboard of  N×N squares. Many mathematicians and computer scientists have worked on defining methods to solve the puzzle. A classic algorithm to be studied/implemented by computer science students.
 
@@ -133,7 +133,7 @@ Q  +  +  +  +  +  +  +  +  +  +  +  +  +
 Compilation (with pthreads)
 `gcc -D_BSD_SOURCE -Wall -lpthread -o queens_pth queens_pth.c`
 
-Execution
+Execution 
 `./queens_pth [number_of_queens] [number_of_threads]`
 
 Execution examples
