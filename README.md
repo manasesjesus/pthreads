@@ -15,15 +15,15 @@ The Pthreads API is used to implement shared memory parallelism. Implementations
 ```
 $ gcc --version
 
- Configured with: --prefix=/Applications/Xcode.app/Contents/Developer/usr --with-gxx-include-dir=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include/c++/4.2.1
+Configured with: --prefix=/Applications/Xcode.app/Contents/Developer/usr --with-gxx-include-dir=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include/c++/4.2.1
 Apple LLVM version 8.0.0 (clang-800.0.42.1)
 Target: x86_64-apple-darwin16.3.0
 Thread model: posix
 InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 ```
->  Command executed on a MacBook Pro, Intel Core i7 2.3 GHz, 4 cores, 256 KB L2 per core, 6 MB L3
+> Command executed on a MacBook Pro, Intel Core i7 2.3 GHz, 4 cores, 256 KB L2 per core, 6 MB L3
 
- If the command doesn’t display the Thread model, an alternative is using the command `find /usr/lib -name 'libpthread.*' -print` to find the library.
+If the command doesn’t display the Thread model, an alternative is using the command `find /usr/lib -name 'libpthread.*' -print` to find the library.
 
 The `pthread.h` header file shall be included in order to implement Pthreads in a program. Adding the option `−lpthread` may be necessary when compiling a program.
 
@@ -31,10 +31,10 @@ The current standard of the Pthreads API is for the C language and it defines a 
 
 - `pthread_     ` Main thread routines for threads management (create, join, exit, et al.)
 - `pthread_attr_` Attributes objects routines
-- ` pthread_mutex_` Mutex Routines 
+- `pthread_mutex_` Mutex Routines 
 - `pthread_mutexattr_`    Mutex attributes objects routines
-- ` pthread_cond_`	    Condition variables routines
-- ` pthread_condattr_`	    Condition variables attributes objects 
+- `pthread_cond_`	    Condition variables routines
+- `pthread_condattr_`	    Condition variables attributes objects 
 - `pthread_rwlock_`	    Read/write lock routines
 
 Pthreads functions are categorized as Thread Routines, Attribute Object Routines, Mutex Routines, Condition Variable Routines, Read/Write Lock Routines, Per-Thread Context Routines and Cleanup Routines. All these routines and more detailed information can be found on the Library Functions Manual by executing the command `man pthread`.
@@ -47,11 +47,11 @@ The actual data that [pthread_t objects] store is system specific, and their dat
 
 An “advanced” implementation of the classic “Hello, World” program using the main Pthreads functions to create, identify and synchronize the threads. It creates four threads by default, and optionally the number of threads to be created can be passed as a command-line parameter when executing the program.
 
-Compilation
-`gcc -Wall -lpthread -o holamigos holamigos.c`
+Compilation<br>
+ `gcc -Wall -lpthread -o holamigos holamigos.c`
 
-Execution
-`./holamigos [number_of_threads]`
+Execution<br> 
+ `./holamigos [number_of_threads]`
 
 Execution example
 ```
@@ -73,12 +73,12 @@ The Pythagoras' theorem states the relation among the three sides of a right-ang
 
 ![Pythagoras' theorem](img/pythagorean.png)
 
- The program uses two threads; each one to calculate the areas of the two squares on the sides. Initially, the hypotenuse value is set to zero. When one thread has made its calculation, it sums it to the hypotenuse, therefore it has to be treated as a critical section. It uses mutex to protect the shared data. To compile it may be necessary to add the option -lm to link the math.h library.
+The program uses two threads; each one to calculate the areas of the two squares on the sides. Initially, the hypotenuse value is set to zero. When one thread has made its calculation, it sums it to the hypotenuse, therefore it has to be treated as a critical section. It uses mutex to protect the shared data. To compile it may be necessary to add the option -lm to link the math.h library.
 
-Compilation
+Compilation<br>
 `gcc -lm -Wall -lpthread -o pythagoras pythagoras.c`
 
-Execution
+Execution<br>
 `./pythagoras <side_a> <side_b>`
 
 Execution example
@@ -101,10 +101,10 @@ The puzzle was originally described by the chess composer Max Bezzel and extende
 
 This queens problem can be computationally expensive. The bigger the board, the bigger the possible solutions to situate the queens on it. Two versions have been implemented to compare performance, with and without pthreads and using backtracking to solve the the problem. To compile it may be necessary to add the option -D_BSD_SOURCE to be able to use the timing functions.
 
-Compilation (without pthreads)
+Compilation (without pthreads)<br>
 `gcc -D_BSD_SOURCE -o queens queens.c`
 
-Execution
+Execution<br>
 `./queens [number_of_queens]`
 
 Execution example
@@ -130,10 +130,10 @@ Q  +  +  +  +  +  +  +  +  +  +  +  +  +
 +  +  +  +  Q  +  +  +  +  +  +  +  +  +
 ```
 
-Compilation (with pthreads)
+Compilation (with pthreads)<br>
 `gcc -D_BSD_SOURCE -Wall -lpthread -o queens_pth queens_pth.c`
 
-Execution 
+Execution<br> 
 `./queens_pth [number_of_queens] [number_of_threads]`
 
 Execution examples
