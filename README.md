@@ -1,4 +1,4 @@
-# Parallel computing with Pthreads
+# Parallel Computing with Pthreads
 
 Portability is written with P of POSIX (Portable Operating System Interface), which is a registered trademark and a set of standards specified by the IEEE to maintain compatibility between different operating systems. The name POSIX was suggested by Richard Stallman. It is expected to be pronounced pahz-icks, as in positive, not poh-six, or other variations.
 
