@@ -5,13 +5,14 @@ Portability is written with P of POSIX (Portable Operating System Interface), wh
 A Thread is specified by the POSIX Base Definitions as:
 _A single flow of control within a process. Each thread has its own thread ID, scheduling priority and policy, errno value, thread-specific key/value bindings, and the required system resources to support a flow of control. Anything whose address may be determined by a thread, including but not limited to static variables, storage obtained via malloc(), directly addressable storage obtained through implementation-defined functions, and automatic variables, are accessible to all threads in the same process_.
 
-Pthreads is the short notation of POSIX Threads. It is an execution model that specifies how work takes place and it allows a program to manage multiple flows of work (aka threads) that overlap in time. POSIX Threads is an API defined by the standard IEEE POSIX 1003.1c.
-In all Pthreads programs, all the running threads can access global variables. This is a common approach to develop a threaded program, so all threads can access the values in an easier way than defining a data structure and passing it as a parameter to a thread. While all global variables are shared, all local variables are kept private to the running thread.
+Pthreads is the short notation of POSIX Threads. It is an execution model that specifies how work takes place, and it allows a program to manage multiple flows of work (aka threads) that overlap in time. POSIX Threads is an API defined by the standard IEEE POSIX 1003.1c.
+In Pthreads programs, all the running threads can access global variables. This is a common approach to develop a threaded program, so all threads can access the values in an easier way than defining a data structure and passing it as a parameter to a thread. While all global variables are shared, all local variables are kept private to the running thread.
 
 
 ## The Pthreads API
 
 The Pthreads API is used to implement shared memory parallelism. Implementations of the API are available in many UNIX based operating systems that are POSIX-conformant (Linux, macOS, Solaris, et al.) and it is normally included as a library named libpthread. For instance, this library is present under /usr/lib directory as libpthread.dylib which is a symbolic link to libSystem.dylib in macOS. One way to validate if an operating system supports Pthreads is with the gcc compiler using the following command:
+
 ```
 $ gcc --version
 
@@ -21,6 +22,7 @@ Target: x86_64-apple-darwin16.3.0
 Thread model: posix
 InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 ```
+
 > Command executed on a MacBook Pro, Intel Core i7 2.3 GHz, 4 cores, 256 KB L2 per core, 6 MB L3
 
 If the command doesn’t display the Thread model, an alternative is using the command `find /usr/lib -name 'libpthread.*' -print` to find the library.
@@ -39,8 +41,6 @@ The current standard of the Pthreads API is for the C language and it defines a 
 
 Pthreads functions are categorized as Thread Routines, Attribute Object Routines, Mutex Routines, Condition Variable Routines, Read/Write Lock Routines, Per-Thread Context Routines and Cleanup Routines. All these routines and more detailed information can be found on the Library Functions Manual by executing the command `man pthread`.
 
-The actual data that [pthread_t objects] store is system specific, and their data members aren’t directly accessible to user code. However, the Pthreads standard guarantees that a pthread_t  object does store enough information to uniquely identify the thread with which it’s associated. Each thread in a process is uniquely identified during its lifetime by a value of type pthread_t called a thread ID.
-
 ## Examples
 
 #### [holamigos.c](holamigos.c)
@@ -54,6 +54,7 @@ Execution<br>
  `./holamigos [number_of_threads]`
 
 Execution example
+
 ```
 $ ./holamigos 7
 
@@ -73,7 +74,7 @@ The Pythagoras' theorem states the relation among the three sides of a right-ang
 
 ![Pythagoras' theorem](img/pythagorean.png)
 
-The program uses two threads; each one to calculate the areas of the two squares on the sides. Initially, the hypotenuse value is set to zero. When one thread has made its calculation, it sums it to the hypotenuse, therefore it has to be treated as a critical section. It uses mutex to protect the shared data. To compile it may be necessary to add the option -lm to link the math.h library.
+The program uses two threads; each one to calculate the areas of the two squares on the sides. Initially, the hypotenuse value is set to zero. When one thread has made its calculation, it sums it to the hypotenuse, therefore it has to be treated as a pthread critical section. It uses mutex to protect the shared data. To compile, it may be necessary to add the option -lm to link the math.h library.
 
 Compilation<br>
 `gcc -lm -Wall -lpthread -o pythagoras pythagoras.c`
@@ -82,6 +83,7 @@ Execution<br>
 `./pythagoras <side_a> <side_b>`
 
 Execution example
+
 ```
 $ ./pythagoras 3.5 4.5
 
@@ -99,7 +101,7 @@ The Eight Queens Puzzle is a classic strategy game problem that consists of a ch
 
 The puzzle was originally described by the chess composer Max Bezzel and extended by Franz Nauck to be a N-Queens Puzzle, with N queens on a chessboard of  N×N squares. Many mathematicians and computer scientists have worked on defining methods to solve the puzzle. A classic algorithm to be studied/implemented by computer science students.
 
-This queens problem can be computationally expensive. The bigger the board, the bigger the possible solutions to situate the queens on it. Two versions have been implemented to compare performance, with and without pthreads and using backtracking to solve the the problem. To compile it may be necessary to add the option -D_BSD_SOURCE to be able to use the timing functions.
+This queens problem can be computationally expensive. The bigger the board, the bigger the possible solutions to situate the queens on it. Two versions have been implemented to compare performance, with and without pthreads and using backtracking to solve the the problem. To compile, it may be necessary to add the option -D_BSD_SOURCE to be able to use the timing functions.
 
 Compilation (without pthreads)<br>
 `gcc -D_BSD_SOURCE -o queens queens.c`
